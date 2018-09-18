@@ -35,13 +35,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var storyTextView: UILabel!
     
     // TODO Step 5: Initialise instance variables here
-    
+    var storyIndex: Int = 1
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        storyTextView.text = story1
+        topButton.setTitle(answer1a, for: .normal)
+        bottomButton.setTitle(answer1b, for: .normal)
         
         // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
         
@@ -50,12 +52,60 @@ class ViewController: UIViewController {
     
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
+        var newStory: String = ""
+        var newIndex: Int = 0
+        var newAns1: String = ""
+        var newAns2: String = ""
+        if storyIndex == 1 {
+            if sender.tag == 1 {
+                newStory = story3
+                newIndex = 3
+                newAns1 = answer3a
+                newAns2 = answer3b
+            } else {
+                newStory = story2
+                newIndex = 2
+                newAns1 = answer2a
+                newAns2 = answer2b
+            }
+        } else if storyIndex == 2 {
+            if sender.tag == 1 {
+                newStory = story3
+                newIndex = 3
+                newAns1 = answer3a
+                newAns2 = answer3b
+            } else {
+                newStory = story4
+                newIndex = 4
+            }
+        } else if storyIndex == 3 {
+            if sender.tag == 1 {
+                newStory = story6
+                newIndex = 6
+            } else {
+                newStory = story5
+                newIndex = 5
+            }
+        }
+        updateUI(newStory: newStory, newAns1: newAns1, newAns2: newAns2)
+        self.storyIndex = newIndex
     
-        // TODO Step 4: Write an IF-Statement to update the views
-                
-        // TODO Step 6: Modify the IF-Statement to complete the story
+    }
+    
+    func updateUI(newStory: String, newAns1: String?, newAns2: String?) {
         
-    
+        storyTextView.text = newStory
+        if newAns1 == "" {
+            topButton.isHidden = true
+        } else {
+            topButton.setTitle(newAns1, for: .normal)
+        }
+        if newAns2 == "" {
+            bottomButton.isHidden = true
+        } else {
+            bottomButton.setTitle(newAns2, for: .normal)
+        }
+        
     }
     
 
